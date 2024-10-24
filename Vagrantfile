@@ -71,12 +71,20 @@ Vagrant.configure("2") do |config|
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
     config.vm.provision "shell", inline: <<-SHELL
+
          yum install -y epel-release
          yum install -y nginx lynx
+
          setenforce 0
          sed -ie 's/^SELINUX=.*$/SELINUX=disabled/' /etc/selinux/config
          cat /etc/selinux/config
          systemctl start nginx
          systemctl enable nginx
+	 firewall-cmd --permanent --add-port=80/tcp
+	 firewall-cmd --reload
+
+# 	 systemctl disable firewalld
+# 	 systemctl stop firewalld
+
     SHELL
 end
