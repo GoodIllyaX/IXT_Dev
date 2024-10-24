@@ -1,7 +1,7 @@
 #!/bin/bash
 
-yum update -y
-yum install -y mc git vim httpd
+apt update -y
+apt install -y mc git vim apache2
 
-systemctl start httpd
-systemctl enable httpd
+systemctl start apache2
+systemctl enable apache2
